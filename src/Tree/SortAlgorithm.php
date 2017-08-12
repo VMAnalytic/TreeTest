@@ -23,17 +23,21 @@ class SortAlgorithm
                 /** @var Leaf $next */
                 $next =  $leavesList->getFirst()->getNext();
                 for ($j = 0; $j < $listSize - 1; $j++) {
+
                     $sum += $currentNode->getWeight();
                     if ($currentNode->getWeight() > $next->getWeight()) {
                         $temp = $currentNode;
                         $currentNode = $next;
                         $next = $temp;
+                        var_dump(1);
                     }
                     $currentNode = $next;
                     $next = $next->getNext();
                 }
             }
+//            print_r($leavesList);
         }
-        return new LinkedListLeaves();
+
+        return $leavesList;
     }
 }

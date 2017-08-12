@@ -45,7 +45,7 @@ class NodeTest extends PHPUnit_Framework_TestCase
              ->addLeaf('leafThree', 3);
 
         $this->assertTrue($root->hasLeafs());
-        $this->assertEquals($root->geLeafs()->getSize(), 3);
+        $this->assertEquals($root->getLeafs()->getSize(), 3);
     }
 
     public function testGetParent()

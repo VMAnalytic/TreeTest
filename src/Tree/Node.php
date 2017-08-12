@@ -50,6 +50,11 @@ class Node
         return $this;
     }
 
+    /**
+     * @param string $name
+     * @param int $weight
+     * @return $this
+     */
     public function addLeaf(string $name, int $weight)
     {
         if ($this->leafs === null) {
@@ -67,45 +72,60 @@ class Node
         return $this;
     }
 
+    public function push(Leaf $leaf)
+    {
+        if ($this->leafs->getLast() !== null) {
+            $this->leafs->getLast()->setNext($leaf);
+        } else {
+            $this->leafs->add($leaf->getName(), $leaf->getWeight());
+        }
 
+        return $this;
+    }
+
+    /**
+     * @return Node|null
+     */
     public function getParent()
     {
         return $this->parent;
     }
 
+    /**
+     * @param Node|null $parent
+     */
     public function setParent(Node $parent = null)
     {
         $this->parent = $parent;
     }
 
+    /**
+     * @return array
+     */
     public function getChildren()
     {
         return $this->children;
     }
 
-    public function geLeafs()
+    public function getLeafs()
     {
         return $this->leafs;
     }
 
+    /**
+     * @return bool
+     */
     public function hasLeafs(): bool
     {
         return $this->leafs->getSize() > 0;
     }
 
-    public function sort(SortAlgorithm $sortAlgorithm)
-    {
-        $this->leafs->merge($tail);
-        $newTail = $sortAlgorithm->sort($this->leafs);
-
-        foreach ($this->children as $childrenNode) {
-            $childrenNode->visit($sortAlgorithm, $newTail);
-        }
-    }
-
+    /**
+     * @param SortVisitor $visitor
+     * @return $this
+     */
     public function accept(SortVisitor $visitor)
     {
-//        return $visitor->visit($this);
         $visitor->visit($this);
 
         return $this;
@@ -117,6 +137,11 @@ class Node
     public function isRoot()
     {
         return $this->getParent() === null;
+    }
+
+    public function clearLeaves()
+    {
+        $this->leafs = new LinkedListLeaves();
     }
 
 

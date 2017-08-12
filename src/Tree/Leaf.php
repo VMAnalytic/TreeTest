@@ -63,8 +63,10 @@ class Leaf
      * @param Leaf $leaf
      * @return Leaf
      */
-    public function setNext(Leaf $leaf)
+    public function setNext($leaf)
     {
         return $this->next = $leaf;
     }
+
+
 }

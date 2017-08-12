@@ -17,11 +17,6 @@ class LinkedListLeaves
     private $head;
 
     /**
-     * @var Leaf
-     */
-    private $last;
-
-    /**
      * @var int
      */
     private $size;
@@ -50,26 +45,6 @@ class LinkedListLeaves
         $this->size++;
     }
 
-    public function sort()
-    {
-        if ($this->size > 1) {
-            for ($i = 0; $i < $this->size; $i++ ) {
-                $currentNode = $this->head;
-                /** @var Leaf $next */
-                $next = $this->head->getNext();
-                for ($j = 0; $j < $this->size - 1; $j++) {
-                    if ($currentNode->getWeight() > $next->getWeight()) {
-                        $temp = $currentNode;
-                        $currentNode = $next;
-                        $next = $temp;
-                    }
-                    $currentNode = $next;
-                    $next = $next->getNext();
-                }
-            }
-        }
-    }
-
     /**
      * @return bool
      */
@@ -92,12 +67,19 @@ class LinkedListLeaves
     public function getLast()
     {
         $current = $this->head;
+        if ($current === null) {
+            return $current;
+        }
         while ($current->getNext() !== null) {
             $current = $current->getNext();
         }
+
         return $current;
     }
 
+    /**
+     * @return int
+     */
     public function getSize()
     {
         return $this->size;
@@ -105,7 +87,38 @@ class LinkedListLeaves
 
     public function merge(LinkedListLeaves $leaves)
     {
-        $this->getLast()->setNext($leaves->getFirst());
+        if ($this->isEmpty()) {
+            return $leaves;
+        }
+        if ($this->getFirst()) {
+            $this->getFirst()->setNext($leaves->getFirst());
+        }
+        if ($this->getLast()) {
+            $this->getLast()->setNext($leaves->getFirst());
+        }
         $this->size += $leaves->getSize();
+
+        return $this;
+    }
+
+    public function push(Leaf $leaf)
+    {
+        if ($this->head === null) {
+            $this->head = $leaf;
+        } else {
+            $last = $this->getLast();
+            $last->setNext($leaf);
+        }
+        $this->size++;
+    }
+
+    public function shift()
+    {
+        $temp = $this->head;
+        $this->head = $this->head->getNext();
+        if($this->head != null)
+            $this->size--;
+
+        return $temp;
     }
 }
