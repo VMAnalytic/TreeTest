@@ -1,15 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: myroslav
- * Date: 09.08.17
- * Time: 13:38
- */
 
 namespace TreeTest\Tree;
-
-
-use LogicException;
 
 class LinkedListLeaves
 {
@@ -110,11 +101,17 @@ class LinkedListLeaves
         return $this;
     }
 
+    /**
+     * @param Leaf $leaf
+     */
     public function push(Leaf $leaf)
     {
         $this->add($leaf->getName(), $leaf->getWeight());
     }
 
+    /**
+     * @return null|Leaf
+     */
     public function shift()
     {
         if ($this->head === null) {

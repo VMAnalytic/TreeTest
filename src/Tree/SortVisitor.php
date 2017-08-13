@@ -42,6 +42,10 @@ class SortVisitor implements Visitor
         }
     }
 
+    /**
+     * @param Node $node
+     * @return Node
+     */
     private function mergeTail(Node $node)
     {
         if (!$this->tail->isEmpty()) {
@@ -51,6 +55,10 @@ class SortVisitor implements Visitor
         return $node;
     }
 
+    /**
+     * @param Node $node
+     * @param LinkedListLeaves $sortedList
+     */
     private function fillNode(Node $node, LinkedListLeaves $sortedList)
     {
         $sum = 0;
@@ -58,7 +66,6 @@ class SortVisitor implements Visitor
             $leaf = $sortedList->shift();
             $node->push($leaf);
             $sum += $leaf->getWeight();
-
         }
         $this->tail = $sortedList;
     }

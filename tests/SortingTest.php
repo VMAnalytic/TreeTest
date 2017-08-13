@@ -1,16 +1,11 @@
 <?php
+
 use TreeTest\Tree\LinkedListLeaves;
 use TreeTest\Tree\MergeSortAlgorithm;
 use TreeTest\Tree\Node;
 use TreeTest\Tree\SortAlgorithm;
 use TreeTest\Tree\SortVisitor;
 
-/**
- * Created by PhpStorm.
- * User: Admin
- * Date: 12.08.2017
- * Time: 17:32
- */
 class SortingTest extends PHPUnit_Framework_TestCase
 {
     public function testLinkedLeavesListFilling()

@@ -1,18 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: myroslav
- * Date: 09.08.17
- * Time: 13:38
- */
 
 namespace TreeTest\Tree;
 
-
 class MergeSortAlgorithm implements SortingAlgorithm
 {
-    const LIMIT = 3;
-
     /**
      * @param LinkedListLeaves $listLeaves
      * @return LinkedListLeaves
@@ -27,6 +18,10 @@ class MergeSortAlgorithm implements SortingAlgorithm
         return $listLeaves;
     }
 
+    /**
+     * @param Leaf $head
+     * @return Leaf
+     */
     public function mergeSort(Leaf $head): Leaf
     {
         if ($head->getNext() === null) {
@@ -86,29 +81,5 @@ class MergeSortAlgorithm implements SortingAlgorithm
         }
 
         return $result;
-
-//        $temp = new Leaf('temp', 0);
-//        $finlList = $temp;
-//
-//        while ($left != null && $right != null) {
-//            if ($left->getWeight() < $right->getWeight())
-//            {
-//                $temp->setNext($left);
-//                $left = $left->getNext();
-//            } else
-//            {
-//                $temp->setNext($right);
-//                $right = $right->getNext();
-//            }
-//            $temp = $temp->getNext();
-//        }
-//
-//        if ($left == null) {
-//            $temp->setNext($right);
-//        } else {
-//            $temp->setNext($left);
-//        }
-//        return $finlList->getNext();
-
     }
 }

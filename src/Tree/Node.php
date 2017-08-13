@@ -30,7 +30,7 @@ class Node
      */
     public function __construct(string $name) {
         $this->name = $name;
-        $this->leafs = new LinkedListLeaves();
+        $this->leavesList = new LinkedListLeaves();
     }
 
     /**
@@ -52,25 +52,25 @@ class Node
      */
     public function addLeaf(string $name, int $weight)
     {
-        $this->leafs->add($name, $weight);
+        $this->leavesList->add($name, $weight);
 
         return $this;
     }
 
     public function addLeafs(LinkedListLeaves $linkedListLeaves)
     {
-        $this->leafs->merge($linkedListLeaves);
+        $this->leavesList->merge($linkedListLeaves);
 
         return $this;
     }
 
+    /**
+     * @param Leaf $leaf
+     * @return $this
+     */
     public function push(Leaf $leaf)
     {
-//        if ($this->leafs->getLast() !== null) {
-//            $this->leafs->getLast()->setNext($leaf);
-//        } else {
-            $this->leafs->add($leaf->getName(), $leaf->getWeight());
-//        }
+        $this->leavesList->add($leaf->getName(), $leaf->getWeight());
 
         return $this;
     }
@@ -101,7 +101,7 @@ class Node
 
     public function getLeafs()
     {
-        return $this->leafs;
+        return $this->leavesList;
     }
 
     /**
@@ -109,7 +109,7 @@ class Node
      */
     public function hasLeafs(): bool
     {
-        return $this->leafs->getSize() > 0;
+        return $this->leavesList->getSize() > 0;
     }
 
     /**
@@ -133,7 +133,7 @@ class Node
 
     public function clearLeaves()
     {
-        $this->leafs = new LinkedListLeaves();
+        $this->leavesList = new LinkedListLeaves();
     }
 
 }
