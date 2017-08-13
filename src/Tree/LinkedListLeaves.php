@@ -89,12 +89,30 @@ class LinkedListLeaves
         return $this->size;
     }
 
+    /**
+     * @return int
+     */
+    public function getTotalWeight(): int
+    {
+        $current = $this->head;
+        if ($current === null) {
+            return 0;
+        }
+        $totalWeight = $current->getWeight();
+        while ($current->getNext() !== null) {
+            $current = $current->getNext();
+            $totalWeight += $current->getWeight();
+        }
+
+        return $totalWeight;
+    }
+
     public function merge(LinkedListLeaves $leaves)
     {
         if ($this->getLast()) {
             $this->getLast()->setNext($leaves->getFirst());
         } elseif ($leaves->getFirst()) {
-//            $this->head = $leaves->getFirst();
+            $this->head = $leaves->getFirst();
         }
         $this->size += $leaves->getSize();
 

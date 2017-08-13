@@ -47,4 +47,16 @@ class LinkedListTest extends PHPUnit_Framework_TestCase
         $firstLeavesList->add('zero', 0);
     }
 
+    public function testTotalWeightFunction()
+    {
+        $firstLeavesList = new LinkedListLeaves();
+        $firstLeavesList->add('one', 1);
+        $firstLeavesList->add('two', 2);
+        $firstLeavesList->add('three', 3);
+        $firstLeavesList->add('four', 4);
+        $firstLeavesList->add('five', -5);
+
+        $this->assertEquals($firstLeavesList->getTotalWeight(), 5);
+    }
+
 }
