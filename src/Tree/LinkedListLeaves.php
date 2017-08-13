@@ -107,6 +107,10 @@ class LinkedListLeaves
         return $totalWeight;
     }
 
+    /**
+     * @param LinkedListLeaves $leaves
+     * @return $this
+     */
     public function merge(LinkedListLeaves $leaves)
     {
         if ($this->getLast()) {
@@ -141,5 +145,21 @@ class LinkedListLeaves
             $this->size--;
 
         return $temp;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $arrayList = [];
+        $current = $this->head;
+
+        while($current !== null)
+        {
+            array_push($arrayList, $current);
+            $current = $current->getNext();
+        }
+        return $arrayList;
     }
 }

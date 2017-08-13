@@ -1,5 +1,7 @@
 <?php
 
+use TreeTest\Tree\Leaf;
+use TreeTest\Tree\LinkedListLeaves;
 use TreeTest\Tree\MergeSortAlgorithm;
 use TreeTest\Tree\Node;
 use TreeTest\Tree\SortVisitor;
@@ -54,7 +56,36 @@ class SortingTest extends PHPUnit_Framework_TestCase
 
         $testVisitor = new TestVisitor();
         $result->accept($testVisitor);
+    }
 
+    public function testMergeSorting()
+    {
+        $leavesList = new LinkedListLeaves();
+        $leavesList->push($two = new Leaf('two', 2));
+        $leavesList->push($one = new Leaf('one', 1));
+        $leavesList->push($three = new Leaf('three', 3));
+        $leavesList->push($five = new Leaf('five', 5));
+        $leavesList->push($four = new Leaf('four', 4));
+        $leavesList->push($minus = new Leaf('minus', -10));
+
+        $sortAlgorithm = new MergeSortAlgorithm();
+
+        $sortAlgorithm->sort($leavesList);
+
+        $sortedNames = [];
+        /** @var Leaf $leaf */
+        foreach ($leavesList->toArray() as $leaf) {
+            $sortedNames[] = $leaf->getName();
+        }
+
+        $this->assertSame([
+            $minus->getName(),
+            $one->getName(),
+            $two->getName(),
+            $three->getName(),
+            $four->getName(),
+            $five->getName()
+        ], $sortedNames);
     }
 
 }

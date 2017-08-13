@@ -63,7 +63,9 @@ class Leaf
      */
     public function setNext($leaf)
     {
-        return $this->next = $leaf;
+        $this->next = $leaf;
+
+        return $this;
     }
 
 }
