@@ -1,15 +1,7 @@
 <?php
+use TreeTest\Tree\Leaf;
 use TreeTest\Tree\LinkedListLeaves;
-use TreeTest\Tree\Node;
-use TreeTest\Tree\SortAlgorithm;
-use TreeTest\Tree\SortVisitor;
 
-/**
- * Created by PhpStorm.
- * User: Admin
- * Date: 12.08.2017
- * Time: 17:32
- */
 class LinkedListTest extends PHPUnit_Framework_TestCase
 {
     public function testLinkedLeavesListFilling()
@@ -38,12 +30,21 @@ class LinkedListTest extends PHPUnit_Framework_TestCase
         $secondLeavesList = new LinkedListLeaves();
         $secondLeavesList->add('six', 6);
         $secondLeavesList->add('seven', 7);
+        $secondLeavesList->push(new Leaf('eight', 8));
 
         $firstLeavesList->merge($secondLeavesList);
 
-        $this->assertEquals($firstLeavesList->getLast()->getName(), 'seven');
-        $this->assertEquals($firstLeavesList->getSize(), 7);
+        $this->assertEquals($firstLeavesList->getLast()->getName(), 'eight');
+        $this->assertEquals($firstLeavesList->getSize(), 8);
         $this->assertFalse($firstLeavesList->isEmpty());
+    }
+
+    public function testZeroWeightException()
+    {
+        $this->expectException(LogicException::class);
+
+        $firstLeavesList = new LinkedListLeaves();
+        $firstLeavesList->add('zero', 0);
     }
 
 }

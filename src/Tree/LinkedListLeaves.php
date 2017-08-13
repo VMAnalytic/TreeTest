@@ -9,6 +9,8 @@
 namespace TreeTest\Tree;
 
 
+use LogicException;
+
 class LinkedListLeaves
 {
     /**
@@ -46,6 +48,17 @@ class LinkedListLeaves
     }
 
     /**
+     * @param Leaf $leaf
+     * @return LinkedListLeaves
+     */
+    public function setHead(Leaf $leaf): LinkedListLeaves
+    {
+        $this->head = $leaf;
+
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function isEmpty(): bool
@@ -80,21 +93,17 @@ class LinkedListLeaves
     /**
      * @return int
      */
-    public function getSize()
+    public function getSize(): int
     {
         return $this->size;
     }
 
     public function merge(LinkedListLeaves $leaves)
     {
-        if ($this->isEmpty()) {
-            return $leaves;
-        }
-        if ($this->getFirst()) {
-            $this->getFirst()->setNext($leaves->getFirst());
-        }
         if ($this->getLast()) {
             $this->getLast()->setNext($leaves->getFirst());
+        } elseif ($leaves->getFirst()) {
+//            $this->head = $leaves->getFirst();
         }
         $this->size += $leaves->getSize();
 
@@ -103,17 +112,14 @@ class LinkedListLeaves
 
     public function push(Leaf $leaf)
     {
-        if ($this->head === null) {
-            $this->head = $leaf;
-        } else {
-            $last = $this->getLast();
-            $last->setNext($leaf);
-        }
-        $this->size++;
+        $this->add($leaf->getName(), $leaf->getWeight());
     }
 
     public function shift()
     {
+        if ($this->head === null) {
+            return null;
+        }
         $temp = $this->head;
         $this->head = $this->head->getNext();
         if($this->head != null)

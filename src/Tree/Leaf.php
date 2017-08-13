@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: myroslav
- * Date: 10.08.17
- * Time: 10:54
- */
 
 namespace TreeTest\Tree;
 
+use LogicException;
 
 class Leaf
 {
@@ -31,6 +26,9 @@ class Leaf
      */
     public function __construct(string $name, int $weight)
     {
+        if ($weight == 0) {
+            throw new LogicException('Weight should be != 0');
+        }
         $this->name = $name;
         $this->weight = $weight;
     }
@@ -67,6 +65,5 @@ class Leaf
     {
         return $this->next = $leaf;
     }
-
 
 }

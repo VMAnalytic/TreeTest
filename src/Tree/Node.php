@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: myroslav
- * Date: 09.08.17
- * Time: 13:38
- */
 
 namespace TreeTest\Tree;
 
@@ -28,7 +22,7 @@ class Node
     /**
      * @var LinkedListLeaves
      */
-    private $leafs;
+    private $leavesList;
 
     /**
      * Node constructor.
@@ -36,6 +30,7 @@ class Node
      */
     public function __construct(string $name) {
         $this->name = $name;
+        $this->leafs = new LinkedListLeaves();
     }
 
     /**
@@ -57,9 +52,6 @@ class Node
      */
     public function addLeaf(string $name, int $weight)
     {
-        if ($this->leafs === null) {
-            $this->leafs = new LinkedListLeaves();
-        }
         $this->leafs->add($name, $weight);
 
         return $this;
@@ -74,11 +66,11 @@ class Node
 
     public function push(Leaf $leaf)
     {
-        if ($this->leafs->getLast() !== null) {
-            $this->leafs->getLast()->setNext($leaf);
-        } else {
+//        if ($this->leafs->getLast() !== null) {
+//            $this->leafs->getLast()->setNext($leaf);
+//        } else {
             $this->leafs->add($leaf->getName(), $leaf->getWeight());
-        }
+//        }
 
         return $this;
     }
@@ -121,10 +113,10 @@ class Node
     }
 
     /**
-     * @param SortVisitor $visitor
+     * @param Visitor $visitor
      * @return $this
      */
-    public function accept(SortVisitor $visitor)
+    public function accept(Visitor $visitor)
     {
         $visitor->visit($this);
 
@@ -143,6 +135,5 @@ class Node
     {
         $this->leafs = new LinkedListLeaves();
     }
-
 
 }

@@ -16,24 +16,18 @@ class SortingTest extends PHPUnit_Framework_TestCase
     public function testLinkedLeavesListFilling()
     {
         $root = new Node('root');
-//        $root->addChild(new Node('one'))
-//             ->addChild(new Node('two'))
-//             ->addChild(new Node('three'));
+        $root->addChild(new Node('a1'))
+             ->addChild(new Node('a2'))
+             ->addChild(new Node('a3'));
 
-        $root->addLeaf('leafOne', 3)
-             ->addLeaf('leafTwo', 2)
-             ->addLeaf('leafThree', 1)
-             ->addLeaf('leafFour', 4)
-             ->addLeaf('leafFive', 5)
-             ->addLeaf('leafSix', 6)
-             ->addLeaf('leafSeven', 7);
+        $root->addLeaf('b2', 2)
+             ->addLeaf('b4', 4)
+             ->addLeaf('b3', 3)
+             ->addLeaf('b1', 1);
 
         $visitor = new SortVisitor(new MergeSortAlgorithm());
 
-
-
         $result = $root->accept($visitor);
-        print_r($result);
     }
 
 }

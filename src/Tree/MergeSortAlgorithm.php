@@ -13,14 +13,18 @@ class MergeSortAlgorithm implements SortingAlgorithm
 {
     const LIMIT = 3;
 
+    /**
+     * @param LinkedListLeaves $listLeaves
+     * @return LinkedListLeaves
+     */
     public function sort(LinkedListLeaves $listLeaves): LinkedListLeaves
     {
-        $sorted = $this->mergeSort($listLeaves->getFirst());
-        $newList = new LinkedListLeaves();
-        $newList->merge($sorted);
+        if (!$listLeaves->isEmpty()) {
+            $sorted = $this->mergeSort($listLeaves->getFirst());
+            $listLeaves->setHead($sorted);
+        };
 
-        return $newList;
-//        $listLeaves->
+        return $listLeaves;
     }
 
     public function mergeSort(Leaf $head): Leaf
@@ -39,8 +43,6 @@ class MergeSortAlgorithm implements SortingAlgorithm
         $sortedList = $this->sortedMerge($left, $right);
 
         return $sortedList;
-
-
     }
 
     /**
